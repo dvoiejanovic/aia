@@ -47,9 +47,7 @@
     "next": "Sljedeća",
     "menu": "Izbornik",
     "language": "Jezik",
-    "skip": "Preskoči na sadržaj",
-    "placeholderPhone": "Ovdje će biti dodan broj telefona i WhatsAppa.",
-    "prototype": "Prototip dizajna"
+    "skip": "Preskoči na sadržaj"
   },
   "photoKinds": {
     "kitchen": "Kuhinja",

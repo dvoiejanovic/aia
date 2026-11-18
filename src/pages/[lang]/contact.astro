@@ -3,7 +3,7 @@ import Layout from '~/layouts/Layout.astro';
 import Hero from '~/layouts/Hero.astro';
 import InquiryForm from '~/components/InquiryForm.astro';
 import { dict, langPaths } from '~/i18n';
-import { HOST_NAME } from '~/data/apartments';
+import { HOST_NAME, HOST_PHONE, HOST_PHONE_DISPLAY } from '~/data/apartments';
 import { photo, altFor } from '~/lib/photos';
 
 export const getStaticPaths = langPaths;
@@ -19,7 +19,10 @@ const t = dict(lang);
       <h2>{t.home.hostTitle}</h2>
       {t.home.host.map((p) => <p>{p}</p>)}
       <p><strong>{HOST_NAME}</strong></p>
-      <p><em>[{t.ui.placeholderPhone}]</em></p>
+      <p class="note__phone">
+        <a href={`tel:${HOST_PHONE}`}>{HOST_PHONE_DISPLAY}</a>
+        <a class="link" href={`https://wa.me/${HOST_PHONE.slice(1)}`} rel="noopener">WhatsApp</a>
+      </p>
     </aside>
   </section>
 </Layout>

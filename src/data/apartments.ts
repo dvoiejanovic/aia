@@ -2,8 +2,11 @@
 // both editable on the admin page.
 import prices from '~/content/prices.json';
 
-export const SITE_NAME = 'Adriatic Island Apartments';
-export const HOST_NAME = 'Sanja Dejanović';
+export const SITE_NAME = 'Adriatic Islands Apartments';
+export const HOST_NAME = 'Ivo Dejanović';
+/** International format, digits only after the plus. */
+export const HOST_PHONE = '+385957786889';
+export const HOST_PHONE_DISPLAY = '+385 95 778 6889';
 export const HOST_EMAIL = 'sanja.dejanovic@yahoo.com';
 export const PRICE_YEAR = prices.year;
 export const FEES = prices.fees;

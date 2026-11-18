@@ -29,8 +29,9 @@
 /* Header */
 .a .hd { position: fixed; inset: 0 0 auto; z-index: 20; display: flex; align-items: center; gap: 2rem; padding: 1.1rem clamp(1.25rem, 3vw, 2.5rem); color: #fff; transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; background: linear-gradient(rgb(6 18 26 / 0.7), rgb(6 18 26 / 0.35) 60%, transparent); padding-bottom: 2rem; }
 .a .hd.is-solid, .a .hd.is-open { padding-bottom: 1.1rem; background: var(--bg); color: var(--ink); box-shadow: 0 1px 0 var(--line); }
-.a .hd__logo { font-family: var(--font-head); font-size: 1.35rem; letter-spacing: 0.04em; text-decoration: none; line-height: 1.05; white-space: nowrap; }
-.a .hd__logo span { display: block; font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.42em; text-transform: uppercase; margin-top: 0.3em; }
+.a .hd__logo { flex-shrink: 0; display: flex; align-items: center; gap: 0.8rem; font-family: var(--font-head); font-size: 1.35rem; letter-spacing: 0.04em; text-decoration: none; line-height: 1.05; white-space: nowrap; }
+.a .hd__logo img { height: 2.6rem; width: auto; }
+.a .hd__name span { display: block; font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.42em; text-transform: uppercase; margin-top: 0.3em; }
 .a .hd__panel { display: flex; align-items: center; gap: 1.5rem; margin-left: auto; }
 .a .hd__nav { display: flex; align-items: center; gap: 1.6rem; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; }
 .a .hd__nav a { text-decoration: none; padding-block: 0.4em; border-bottom: 1px solid transparent; white-space: nowrap; }
@@ -39,7 +40,14 @@
 .a .hd:not(.is-solid):not(.is-open) .hd__cta { background: #fff; color: var(--ink); }
 .a .hd__cta { padding: 0.9em 1.4em; }
 .a .hd__toggle { display: none; margin-left: auto; background: none; border: 1px solid currentColor; color: inherit; font: inherit; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.6em 1em; cursor: pointer; }
-@media (max-width: 1180px) {
+/* Between menu mode and wide screens there is only room for the logo mark, not the name. */
+@media (min-width: 1281px) and (max-width: 1520px) {
+  .a .hd__name { display: none; }
+  .a .hd { gap: 1.25rem; }
+  .a .hd__nav { gap: 1.2rem; }
+  .a .hd__panel { gap: 1.1rem; }
+}
+@media (max-width: 1280px) {
   .a .hd__toggle { display: block; }
   .a .hd__panel { display: none; position: absolute; inset: 100% 0 auto; background: var(--bg); color: var(--ink); flex-direction: column; align-items: stretch; gap: 1.25rem; padding: 1.5rem clamp(1.25rem, 3vw, 2.5rem) 2rem; box-shadow: 0 12px 24px rgb(0 0 0 / 0.08); max-height: calc(100dvh - 4rem); overflow: auto; }
   .a .hd.is-open .hd__panel { display: flex; }
@@ -164,6 +172,9 @@
 .a .ft h2 { font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; margin-bottom: 1rem; font-weight: 500; }
 .a .ft nav a { display: block; text-decoration: none; padding: 0.25em 0; }
 .a .ft nav a:hover { color: #fff; }
+.a .ft__mark { height: 3.5rem; width: auto; margin-bottom: 1rem; }
+.a .ft a { color: inherit; }
+.a .note__phone { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; }
 .a .ft__logo { font-family: var(--font-head); font-size: 1.5rem; color: #fff; line-height: 1.05; }
 .a .ft__logo span { display: block; font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.42em; text-transform: uppercase; margin-top: 0.4em; }
 .a .ft__legal { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgb(255 255 255 / 0.12); font-size: 0.8rem; opacity: 0.7; }

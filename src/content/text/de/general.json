@@ -47,9 +47,7 @@
     "next": "Weiter",
     "menu": "Menü",
     "language": "Sprache",
-    "skip": "Zum Inhalt springen",
-    "placeholderPhone": "Telefon- und WhatsApp-Nummer werden hier ergänzt.",
-    "prototype": "Design-Prototyp"
+    "skip": "Zum Inhalt springen"
   },
   "photoKinds": {
     "kitchen": "Küche",

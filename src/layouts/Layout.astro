@@ -1,5 +1,5 @@
 ---
-// Design A: editorial hotel. Classic multi-page structure.
+// Page frame: header with navigation, footer.
 import '@fontsource/cormorant-garamond/400.css';
 import '@fontsource/cormorant-garamond/500.css';
 import '@fontsource/cormorant-garamond/400-italic.css';
@@ -10,7 +10,9 @@ import type { ImageMetadata } from 'astro';
 import Seo from '~/components/Seo.astro';
 import LangSwitch from '~/components/LangSwitch.astro';
 import { dict } from '~/i18n';
-import { apartments, islands, SITE_NAME, HOST_NAME } from '~/data/apartments';
+import { Image } from 'astro:assets';
+import logo from '~/assets/logo-mark.png';
+import { apartments, islands, SITE_NAME, HOST_NAME, HOST_PHONE, HOST_PHONE_DISPLAY } from '~/data/apartments';
 import { url } from '~/lib/paths';
 
 interface Props { lang: string; path?: string; title: string; description: string; image?: ImageMetadata; jsonLd?: object }
@@ -23,19 +25,24 @@ const to = (p = '') => url(lang, p);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} type="image/svg+xml" />
+    <link rel="icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.png`} type="image/png" />
     <Seo {lang} {path} {title} {description} {image} {jsonLd} />
   </head>
   <body class="a">
     <a class="skip" href="#main">{t.ui.skip}</a>
     <header class="hd" data-header>
-      <a class="hd__logo" href={to()} aria-label={SITE_NAME}>Adriatic Island <span>Apartments</span></a>
+      <a class="hd__logo" href={to()} aria-label={SITE_NAME}>
+        <Image src={logo} alt="" height={96} loading="eager" />
+        <span class="hd__name">Adriatic Islands <span>Apartments</span></span>
+      </a>
       <button class="hd__toggle" type="button" aria-expanded="false" aria-controls="nav-a">{t.ui.menu}</button>
       <div class="hd__panel" id="nav-a">
         <nav class="hd__nav" aria-label={t.ui.menu}>
           {apartments.map((a) => <a href={to(`${a.slug}/`)} aria-current={path === `${a.slug}/` ? 'page' : undefined}>{a.name.replace('Apartment ', '')}</a>)}
           <span class="hd__sep" aria-hidden="true"></span>
           {islands.map((i) => <a href={to(`island-${i.slug}/`)} aria-current={path === `island-${i.slug}/` ? 'page' : undefined}>{t.ui.onIsland} {i.name}</a>)}
+          <span class="hd__sep" aria-hidden="true"></span>
+          <a href={to('contact/')} aria-current={path === 'contact/' ? 'page' : undefined}>{t.ui.contact}</a>
         </nav>
         <LangSwitch {lang} {path} label={t.ui.language} />
         <a class="btn btn--primary hd__cta" href={to('contact/')}>{t.ui.cta}</a>
@@ -45,7 +52,8 @@ const to = (p = '') => url(lang, p);
     <footer class="ft">
       <div class="wrap ft__grid">
         <div>
-          <p class="ft__logo">Adriatic Island <span>Apartments</span></p>
+          <Image class="ft__mark" src={logo} alt="" height={128} />
+          <p class="ft__logo">Adriatic Islands <span>Apartments</span></p>
           <p>{t.home.heroSub}</p>
         </div>
         <nav aria-label={t.ui.apartments}>
@@ -60,6 +68,7 @@ const to = (p = '') => url(lang, p);
         <div>
           <h2>{t.ui.yourHost}</h2>
           <p>{HOST_NAME}<br />Mate Balote 7, 51000 Rijeka</p>
+          <p><a href={`tel:${HOST_PHONE}`}>{HOST_PHONE_DISPLAY}</a></p>
         </div>
       </div>
       <p class="wrap ft__legal">© {new Date().getFullYear()} {SITE_NAME}. {t.ui.allRights}</p>

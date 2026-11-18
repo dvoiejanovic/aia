@@ -210,7 +210,7 @@ collections:
           - { name: "messagePlaceholder", label: "Anything else we should know?", widget: string, i18n: true }
           - { name: "send", label: "Send inquiry", widget: string, i18n: true }
           - { name: "sending", label: "Sending…", widget: string, i18n: true }
-          - { name: "success", label: "Thank you! Your inquiry has been sent. Sanja will reply b…", widget: string, i18n: true }
+          - { name: "success", label: "Thank you! Your inquiry has been sent. Ivo will reply by…", widget: string, i18n: true }
           - { name: "mailto", label: "Your email app has been opened with the inquiry ready to …", widget: text, i18n: true }
           - { name: "error", label: "Something went wrong. Please try again in a moment.", widget: string, i18n: true }
           - { name: "errRequired", label: "Please fill in this field.", widget: string, i18n: true }
@@ -279,8 +279,6 @@ collections:
               - { name: "menu", label: "Menu", widget: string, i18n: true }
               - { name: "language", label: "Language", widget: string, i18n: true }
               - { name: "skip", label: "Skip to content", widget: string, i18n: true }
-              - { name: "placeholderPhone", label: "Phone and WhatsApp number will be added here.", widget: string, i18n: true }
-              - { name: "prototype", label: "Design prototype", widget: string, i18n: true }
           - name: "amenities"
             label: "Amenity names"
             widget: object

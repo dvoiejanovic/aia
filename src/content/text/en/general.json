@@ -47,9 +47,7 @@
     "next": "Next",
     "menu": "Menu",
     "language": "Language",
-    "skip": "Skip to content",
-    "placeholderPhone": "Phone and WhatsApp number will be added here.",
-    "prototype": "Design prototype"
+    "skip": "Skip to content"
   },
   "photoKinds": {
     "kitchen": "Kitchen",

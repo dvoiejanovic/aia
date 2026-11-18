@@ -1,5 +1,5 @@
 import type { Apartment } from '~/data/apartments';
-import { fromPrice, topPrice, SITE_NAME } from '~/data/apartments';
+import { fromPrice, topPrice, SITE_NAME, HOST_PHONE } from '~/data/apartments';
 import type { Dict } from '~/i18n';
 
 /** schema.org structured data for one apartment. Add geo coordinates before launch. */
@@ -12,6 +12,7 @@ export function apartmentSchema(a: Apartment, t: Dict, pageUrl: string, images: 
     url: pageUrl,
     image: images,
     brand: { '@type': 'Brand', name: SITE_NAME },
+    telephone: HOST_PHONE,
     address: {
       '@type': 'PostalAddress',
       streetAddress: a.address.street,

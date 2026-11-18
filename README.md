@@ -1,4 +1,4 @@
-# Adriatic Island Apartments
+# Adriatic Islands Apartments
 
 Website for three holiday apartments on Pag and Cres, built with [Astro](https://astro.build).
 
