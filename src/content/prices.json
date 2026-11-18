@@ -1,7 +1,7 @@
 {
   "year": 2027,
   "fees": {
-    "cleaning": 45,
+    "cleaning": 46,
     "petPerNight": 10,
     "shortStayPercent": 30
   },
