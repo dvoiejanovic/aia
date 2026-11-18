@@ -1,0 +1,36 @@
+---
+import type { Apartment } from '~/data/apartments';
+import { FEES, PRICE_YEAR } from '~/data/apartments';
+import type { Dict } from '~/i18n';
+
+interface Props {
+  apartment: Apartment;
+  t: Dict;
+  /** Hide the heading when the page provides its own. */
+  heading?: boolean;
+}
+const { apartment: a, t, heading = true } = Astro.props;
+const eur = (n: number) => `€${n}`;
+---
+<div class="prices">
+  {heading && <h2 class="prices__title">{t.ui.prices} {PRICE_YEAR}</h2>}
+  <table>
+    <thead>
+      <tr><th scope="col">{t.ui.period}</th><th scope="col">{t.ui.pricePerNight}</th></tr>
+    </thead>
+    <tbody>
+      {a.seasons.map((s) => (
+        <tr>
+          <td>{s.periods.map((p) => <span class="prices__period">{p.from} – {p.to}</span>)}</td>
+          <td class="prices__amount">{eur(s.price)}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <ul class="prices__notes">
+    <li>{t.ui.taxIncluded}</li>
+    <li>{t.ui.cleaning}: {eur(FEES.cleaning)}</li>
+    <li>{t.ui.pet}: {eur(FEES.petPerNight)} {t.ui.perNight}</li>
+    <li>{t.ui.shortStay}: {FEES.shortStayPercent}% {t.ui.perNight}</li>
+  </ul>
+</div>

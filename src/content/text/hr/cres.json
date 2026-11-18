@@ -1,0 +1,47 @@
+{
+  "title": "Uvala Pogana, otok Cres",
+  "tagline": "Krajolik savršenog mira na Punta Križi",
+  "metaDesc": "Uvala Pogana na Punta Križi, otok Cres: bujne šume, mirna uvala, šljunčane i pješčane plaže na 200 m, 15 km od Osora i 39 km od Malog Lošinja.",
+  "body": "Punta Križa i Pogana nesumnjivo su pravi park prirode prepun bogate flore i faune. Čine krajolik savršenstva i mira za ljubitelje prirode i tražitelje avantura.\n\nBujne šume, koje na nekim mjestima izrastaju u prave male „mediteranske džungle“, služe kao idealno utočište za brojnu divljač ovog područja: jelene lopatare, fazane, zečeve, kune, šljuke, patke i mnoge druge vrste.\n\nU blizini apartmana nalazi se poznati restoran Pogana, na glasu po mediteranskoj kuhinji. Samo 200 m dalje su šljunčane i pješčane plaže te kamp Baldarin s trgovinom, restoranima, teniskim terenima, odbojkom na pijesku, mini golfom i najmom brodica, bicikala i kajaka.\n\nPlaže južnog dijela Cresa jednostavno će vas ostaviti bez daha. Šljunčane, pješčane, kamenite – izbor je na vama! Predlažemo izlete na otoke Lošinj i Susak ili posjet povijesnim gradovima Osoru i Cresu. Arhipelagom vodi više od 220 km pješačkih staza; jedna od najljepših vodi iz Osora na Osoršćicu, s jedinstvenim pogledom na cijeli cresko-lošinjski arhipelag.",
+  "nearby": [
+    {
+      "place": "More",
+      "distance": "5 m"
+    },
+    {
+      "place": "Restoran Pogana",
+      "distance": "nekoliko koraka"
+    },
+    {
+      "place": "Besplatno javno parkiralište",
+      "distance": "90 m"
+    },
+    {
+      "place": "Plaže i kamp Baldarin",
+      "distance": "200 m"
+    },
+    {
+      "place": "Osor",
+      "distance": "15 km"
+    },
+    {
+      "place": "Mali Lošinj",
+      "distance": "39 km"
+    }
+  ],
+  "directionsIntro": "Na otok Cres možete doći na dva načina, oba trajektom.",
+  "directions": [
+    {
+      "from": "Iz Istre",
+      "text": "Trajektom iz Brestove (Istra) do Porozine (Cres)."
+    },
+    {
+      "from": "Preko otoka Krka",
+      "text": "Vozite preko otoka Krka i ukrcajte se na trajekt Valbiska (Krk) – Merag (Cres)."
+    },
+    {
+      "from": "Na Cresu",
+      "text": "Vozite prema gradu Cresu i dalje do Osora, gdje most spaja otoke Cres i Lošinj. Na kružnom toku u Osoru skrenite za Punta Križu i vozite kroz netaknutu šumu oko 20 minuta do Pogane. U Google karte upišite „Pogana, Punta Križa“."
+    }
+  ]
+}

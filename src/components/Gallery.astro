@@ -1,0 +1,80 @@
+---
+// Photo grid with a full-screen viewer. Layout is set per design via CSS (.gal, .gal__item).
+import { getImage } from 'astro:assets';
+import Photo from './Photo.astro';
+import { photo, altFor } from '~/lib/photos';
+import type { Dict } from '~/i18n';
+
+interface Props {
+  dir: string;
+  names: string[];
+  t: Dict;
+  where: string;
+  /** How many photos show in the grid; the rest open in the viewer. */
+  show?: number;
+  sizes?: string;
+  class?: string;
+}
+const { dir, names, t, where, show = names.length, sizes = '(min-width: 900px) 33vw, 50vw', class: cls } = Astro.props;
+const items = await Promise.all(
+  names.map(async (name) => ({
+    name,
+    alt: altFor(t, name, where),
+    full: (await getImage({ src: photo(dir, name), width: 1600, format: 'webp' })).src,
+  })),
+);
+const hidden = Math.max(0, items.length - show);
+---
+<div class:list={['gal', cls]} data-gallery>
+  {items.map((it, i) => (
+    <a
+      href={it.full}
+      class:list={['gal__item', { 'gal__item--extra': i >= show }]}
+      data-alt={it.alt}
+      aria-label={`${it.alt} (${i + 1}/${items.length})`}
+    >
+      {i < show && <Photo dir={dir} name={it.name} alt={it.alt} sizes={sizes} eager={i === 0} />}
+      {i === show - 1 && hidden > 0 && <span class="gal__more">+{hidden} {t.ui.photos.toLowerCase()}</span>}
+    </a>
+  ))}
+  <dialog class="lightbox" aria-label={t.ui.photos}>
+    <button type="button" class="lightbox__btn lightbox__close" data-close aria-label={t.ui.close}>×</button>
+    <button type="button" class="lightbox__btn lightbox__prev" data-prev aria-label={t.ui.previous}>‹</button>
+    <figure>
+      <img alt="" />
+      <figcaption></figcaption>
+    </figure>
+    <button type="button" class="lightbox__btn lightbox__next" data-next aria-label={t.ui.next}>›</button>
+  </dialog>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gal) => {
+    const links = [...gal.querySelectorAll<HTMLAnchorElement>('.gal__item')];
+    const dlg = gal.querySelector<HTMLDialogElement>('.lightbox')!;
+    const img = dlg.querySelector('img')!;
+    const cap = dlg.querySelector('figcaption')!;
+    let i = 0;
+    const show = (n: number) => {
+      i = (n + links.length) % links.length;
+      img.src = links[i].href;
+      img.alt = links[i].dataset.alt ?? '';
+      cap.textContent = `${links[i].dataset.alt ?? ''} · ${i + 1}/${links.length}`;
+    };
+    links.forEach((a, n) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        show(n);
+        dlg.showModal();
+      }),
+    );
+    dlg.querySelector('[data-close]')!.addEventListener('click', () => dlg.close());
+    dlg.querySelector('[data-prev]')!.addEventListener('click', () => show(i - 1));
+    dlg.querySelector('[data-next]')!.addEventListener('click', () => show(i + 1));
+    dlg.addEventListener('click', (e) => e.target === dlg && dlg.close());
+    dlg.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(i - 1);
+      if (e.key === 'ArrowRight') show(i + 1);
+    });
+  });
+</script>

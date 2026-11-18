@@ -1,0 +1,81 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Hero from '~/layouts/Hero.astro';
+import Photo from '~/components/Photo.astro';
+import Gallery from '~/components/Gallery.astro';
+import { dict, languages } from '~/i18n';
+import { islands, getIsland, apartmentsOn, fromPrice, pagSmallPhotos } from '~/data/apartments';
+import { photo, altFor } from '~/lib/photos';
+import { url } from '~/lib/paths';
+
+export const getStaticPaths = () =>
+  languages.flatMap((lang) => islands.map((i) => ({ params: { lang, island: i.slug } })));
+const { lang, island } = Astro.params;
+const t = dict(lang);
+const i = getIsland(island);
+const c = t.islands[i.slug];
+const to = (p = '') => url(lang, p);
+const path = `island-${i.slug}/`;
+---
+<Layout {lang} {path} title={c.title} description={c.metaDesc} image={photo(i.slug, i.hero)}>
+  <Hero dir={i.slug} name={i.hero} alt={altFor(t, i.hero, c.title)} kicker={`${t.ui.onIsland} ${i.name}`} title={c.title} sub={c.tagline} />
+
+  <section class="wrap cols">
+    <div>
+      <p class="lead">{c.body[0]}</p>
+      {c.body.slice(1).map((p) => <p>{p}</p>)}
+    </div>
+    <aside class="note">
+      <h2>{t.ui.nearby}</h2>
+      <ul class="nearby">{c.nearby.map((n) => <li><span>{n.place}</span><span>{n.distance}</span></li>)}</ul>
+    </aside>
+  </section>
+
+  <section class="wrap gallery" aria-label={t.ui.photos}>
+    <Gallery dir={i.slug} names={i.photos} {t} where={c.title} show={6} />
+    {i.slug === 'pag' && (
+      <div class="thumbs">
+        {pagSmallPhotos.map((n) => (
+          <figure>
+            <Photo dir="pag" name={n} alt={altFor(t, n, 'Pag')} sizes="12rem" />
+            <figcaption>{altFor(t, n, 'Pag')}</figcaption>
+          </figure>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <p class="kicker">{t.ui.ourApartments}</p>
+      <h2>{t.ui.onIsland} {i.name}</h2>
+      <div class="cards">
+        {apartmentsOn(i.slug).map((a) => (
+          <a class="card" href={to(`${a.slug}/`)}>
+            <div class="card__img"><Photo dir={a.slug} name={a.cover} alt={altFor(t, a.cover, a.name)} sizes="(min-width: 760px) 50vw, 100vw" /></div>
+            <h3>{a.name}</h3>
+            <p>{t.apartments[a.slug].summary}</p>
+            <p class="price"><small>{t.ui.from}</small> €{fromPrice(a)} <small>/ {t.ui.night}</small></p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <p class="kicker">{t.ui.gettingThere}</p>
+    <h2>{t.ui.gettingThere}</h2>
+    <p class="lead" style="max-width:50rem">{c.directionsIntro}</p>
+    <div class="steps">
+      {c.directions.map((d) => <div><h3>{d.from}</h3><p>{d.text}</p></div>)}
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2>{t.form.title}</h2>
+      <p>{t.form.intro}</p>
+      <a class="btn" href={to('contact/')}>{t.ui.cta}</a>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,196 @@
+---
+// Inquiry form. Sends through Web3Forms when PUBLIC_WEB3FORMS_KEY is set;
+// otherwise opens the guest's email app with the inquiry prefilled.
+import { apartments, HOST_EMAIL } from '~/data/apartments';
+import type { Dict } from '~/i18n';
+
+interface Props {
+  t: Dict;
+  preselect?: string;
+  heading?: boolean;
+  id?: string;
+}
+const { t, preselect, heading = true, id = 'inquiry' } = Astro.props;
+const f = t.form;
+const key = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
+const [user, domain] = HOST_EMAIL.split('@');
+---
+<form
+  class="inq"
+  id={id}
+  novalidate
+  data-inquiry
+  data-key={key}
+  data-u={user}
+  data-d={domain}
+  data-subject={f.subject}
+  data-msg-required={f.errRequired}
+  data-msg-email={f.errEmail}
+  data-msg-dates={f.errDates}
+  data-msg-success={f.success}
+  data-msg-mailto={f.mailto}
+  data-msg-error={f.error}
+  data-msg-sending={f.sending}
+  data-yes={f.yes}
+  data-no={f.no}
+>
+  {heading && (
+    <div class="inq__head">
+      <h2>{f.title}</h2>
+      <p>{f.intro}</p>
+    </div>
+  )}
+  <div class="inq__grid">
+    <label class="inq__field inq__field--wide">
+      <span>{f.apartment}</span>
+      <select name="apartment" required data-label={f.apartment}>
+        <option value="" selected={!preselect} disabled>{f.choose}</option>
+        {apartments.map((a) => (
+          <option value={a.name} data-slug={a.slug} selected={a.slug === preselect}>{a.name} – {a.place}</option>
+        ))}
+        <option value={f.anyApartment}>{f.anyApartment}</option>
+      </select>
+    </label>
+    <label class="inq__field">
+      <span>{f.arrival}</span>
+      <input type="date" name="arrival" required data-label={f.arrival} />
+    </label>
+    <label class="inq__field">
+      <span>{f.departure}</span>
+      <input type="date" name="departure" required data-label={f.departure} />
+    </label>
+    <label class="inq__field">
+      <span>{f.guests}</span>
+      <select name="guests" data-label={f.guests}>
+        {[1, 2, 3, 4].map((n) => <option value={n} selected={n === 2}>{n}</option>)}
+      </select>
+    </label>
+    <label class="inq__check">
+      <input type="checkbox" name="pet" data-label={t.ui.pet} />
+      <span>{f.pet}</span>
+    </label>
+    <label class="inq__field">
+      <span>{f.name}</span>
+      <input type="text" name="name" autocomplete="name" required data-label={f.name} />
+    </label>
+    <label class="inq__field">
+      <span>{f.email}</span>
+      <input type="email" name="email" autocomplete="email" required data-label={f.email} />
+    </label>
+    <label class="inq__field inq__field--wide">
+      <span>{f.phone} <em>({f.optional})</em></span>
+      <input type="tel" name="phone" autocomplete="tel" data-label={f.phone} />
+    </label>
+    <label class="inq__field inq__field--wide">
+      <span>{f.message} <em>({f.optional})</em></span>
+      <textarea name="message" rows="4" placeholder={f.messagePlaceholder} data-label={f.message}></textarea>
+    </label>
+    <!-- Spam trap: hidden from people, filled in by bots. -->
+    <input type="checkbox" name="botcheck" class="inq__trap" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  </div>
+  <div class="inq__foot">
+    <button type="submit" class="btn btn--primary">{f.send}</button>
+    <p class="inq__privacy">{f.privacy}</p>
+  </div>
+  <p class="inq__status" role="status" aria-live="polite" hidden></p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-inquiry]').forEach((form) => {
+    const d = form.dataset;
+    const status = form.querySelector<HTMLElement>('.inq__status')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    const el = (name: string) => form.elements.namedItem(name) as HTMLInputElement;
+
+    // Preselect from ?apartment=slug and keep departure after arrival.
+    const wanted = new URLSearchParams(location.search).get('apartment');
+    if (wanted) {
+      const opt = form.querySelector<HTMLOptionElement>(`option[data-slug="${CSS.escape(wanted)}"]`);
+      if (opt) opt.selected = true;
+    }
+    const today = new Date().toISOString().slice(0, 10);
+    el('arrival').min = today;
+    el('departure').min = today;
+    el('arrival').addEventListener('change', () => (el('departure').min = el('arrival').value || today));
+
+    const setError = (input: HTMLElement, msg: string) => {
+      const field = input.closest('label')!;
+      field.querySelector('.inq__error')?.remove();
+      field.classList.toggle('is-invalid', !!msg);
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      if (msg) {
+        const p = document.createElement('small');
+        p.className = 'inq__error';
+        p.textContent = msg;
+        field.append(p);
+      }
+    };
+
+    const validate = () => {
+      let firstBad: HTMLElement | null = null;
+      for (const input of form.querySelectorAll<HTMLInputElement>('[required]')) {
+        let msg = '';
+        if (!input.value.trim()) msg = d.msgRequired!;
+        else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) msg = d.msgEmail!;
+        else if (input.name === 'departure' && input.value <= el('arrival').value) msg = d.msgDates!;
+        setError(input, msg);
+        if (msg && !firstBad) firstBad = input;
+      }
+      firstBad?.focus();
+      return !firstBad;
+    };
+
+    const say = (text: string, kind: 'ok' | 'bad') => {
+      status.textContent = text;
+      status.dataset.kind = kind;
+      status.hidden = false;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.hidden = true;
+      if (el('botcheck').checked || !validate()) return;
+
+      // Collect the answers as "Label: value" lines, labelled in the guest's language.
+      const lines: [string, string][] = [];
+      for (const input of form.querySelectorAll<HTMLInputElement>('[data-label]')) {
+        const value = input.type === 'checkbox' ? (input.checked ? d.yes! : d.no!) : input.value.trim();
+        if (value) lines.push([input.dataset.label!, value]);
+      }
+      const subject = `${d.subject}: ${el('apartment').value}, ${el('arrival').value} – ${el('departure').value}`;
+
+      if (!d.key) {
+        const body = lines.map(([k, v]) => `${k}: ${v}`).join('\n');
+        location.href = `mailto:${d.u}@${d.d}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        say(d.msgMailto!, 'ok');
+        return;
+      }
+
+      const label = button.textContent;
+      button.disabled = true;
+      button.textContent = d.msgSending!;
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: d.key,
+            subject,
+            from_name: el('name').value,
+            replyto: el('email').value,
+            ...Object.fromEntries(lines),
+          }),
+        });
+        const json = await res.json();
+        if (!json.success) throw new Error(json.message);
+        form.reset();
+        say(d.msgSuccess!, 'ok');
+      } catch {
+        say(d.msgError!, 'bad');
+      } finally {
+        button.disabled = false;
+        button.textContent = label;
+      }
+    });
+  });
+</script>

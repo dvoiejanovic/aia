@@ -1,0 +1,35 @@
+---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { languages, dict } from '~/i18n';
+import { SITE_NAME } from '~/data/apartments';
+import { url } from '~/lib/paths';
+
+interface Props {
+  lang: string;
+  /** Path after the language, e.g. 'rino/'. */
+  path?: string;
+  title: string;
+  description: string;
+  image?: ImageMetadata;
+  jsonLd?: object | object[];
+}
+const { lang, path = '', title, description, image, jsonLd } = Astro.props;
+const abs = (p: string) => new URL(p, Astro.site).href;
+const fullTitle = `${title} | ${SITE_NAME}`;
+const og = image ? await getImage({ src: image, width: 1200, height: 630, format: 'jpg' }) : undefined;
+---
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={abs(url(lang, path))} />
+{languages.map((l) => <link rel="alternate" hreflang={l} href={abs(url(l, path))} />)}
+<link rel="alternate" hreflang="x-default" href={abs(url('en', path))} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:locale" content={dict(lang).locale} />
+<meta property="og:url" content={abs(url(lang, path))} />
+{og && <meta property="og:image" content={abs(og.src)} />}
+<meta name="twitter:card" content="summary_large_image" />
+{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

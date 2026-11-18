@@ -1,0 +1,76 @@
+---
+// Design A: editorial hotel. Classic multi-page structure.
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource-variable/inter';
+import '~/styles/shared.css';
+import '~/styles/site.css';
+import type { ImageMetadata } from 'astro';
+import Seo from '~/components/Seo.astro';
+import LangSwitch from '~/components/LangSwitch.astro';
+import { dict } from '~/i18n';
+import { apartments, islands, SITE_NAME, HOST_NAME } from '~/data/apartments';
+import { url } from '~/lib/paths';
+
+interface Props { lang: string; path?: string; title: string; description: string; image?: ImageMetadata; jsonLd?: object }
+const { lang, path = '', title, description, image, jsonLd } = Astro.props;
+const t = dict(lang);
+const to = (p = '') => url(lang, p);
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} type="image/svg+xml" />
+    <Seo {lang} {path} {title} {description} {image} {jsonLd} />
+  </head>
+  <body class="a">
+    <a class="skip" href="#main">{t.ui.skip}</a>
+    <header class="hd" data-header>
+      <a class="hd__logo" href={to()} aria-label={SITE_NAME}>Adriatic Island <span>Apartments</span></a>
+      <button class="hd__toggle" type="button" aria-expanded="false" aria-controls="nav-a">{t.ui.menu}</button>
+      <div class="hd__panel" id="nav-a">
+        <nav class="hd__nav" aria-label={t.ui.menu}>
+          {apartments.map((a) => <a href={to(`${a.slug}/`)} aria-current={path === `${a.slug}/` ? 'page' : undefined}>{a.name.replace('Apartment ', '')}</a>)}
+          <span class="hd__sep" aria-hidden="true"></span>
+          {islands.map((i) => <a href={to(`island-${i.slug}/`)} aria-current={path === `island-${i.slug}/` ? 'page' : undefined}>{t.ui.onIsland} {i.name}</a>)}
+        </nav>
+        <LangSwitch {lang} {path} label={t.ui.language} />
+        <a class="btn btn--primary hd__cta" href={to('contact/')}>{t.ui.cta}</a>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="ft">
+      <div class="wrap ft__grid">
+        <div>
+          <p class="ft__logo">Adriatic Island <span>Apartments</span></p>
+          <p>{t.home.heroSub}</p>
+        </div>
+        <nav aria-label={t.ui.apartments}>
+          <h2>{t.ui.apartments}</h2>
+          {apartments.map((a) => <a href={to(`${a.slug}/`)}>{a.name}</a>)}
+        </nav>
+        <nav aria-label={t.ui.islands}>
+          <h2>{t.ui.islands}</h2>
+          {islands.map((i) => <a href={to(`island-${i.slug}/`)}>{t.islands[i.slug].title}</a>)}
+          <a href={to('contact/')}>{t.ui.contact}</a>
+        </nav>
+        <div>
+          <h2>{t.ui.yourHost}</h2>
+          <p>{HOST_NAME}<br />Mate Balote 7, 51000 Rijeka</p>
+        </div>
+      </div>
+      <p class="wrap ft__legal">© {new Date().getFullYear()} {SITE_NAME}. {t.ui.allRights}</p>
+    </footer>
+    <script>
+      const hd = document.querySelector<HTMLElement>('[data-header]')!;
+      const btn = hd.querySelector<HTMLButtonElement>('.hd__toggle')!;
+      const onScroll = () => hd.classList.toggle('is-solid', scrollY > 40);
+      addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+      btn.addEventListener('click', () => btn.setAttribute('aria-expanded', String(hd.classList.toggle('is-open'))));
+    </script>
+  </body>
+</html>

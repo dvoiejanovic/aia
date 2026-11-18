@@ -1,0 +1,43 @@
+{
+  "title": "Košljun, isola di Pag",
+  "tagline": "Natura intatta, pinete centenarie e un mare cristallino",
+  "metaDesc": "Košljun sull’isola di Pag: tranquillo paesino sul mare circondato dalla pineta, a 9 km dalla città di Pag e a 60 km da Zara. Spiagge, windsurf, formaggio e merletto di Pag.",
+  "body": "Košljun, sull’isola di Pag, è un’ottima destinazione per chi vuole riposare in una natura intatta. È circondato da un bosco di pini centenari e da Košljun si gode un bellissimo panorama sulle isole di Vir, Silba e Olib.\n\nÈ un luogo tranquillissimo e rilassante. Košljun ha molte giornate di sole e il tempo è prevalentemente bello, con un vento moderato durante il giorno che lo rende ideale per il windsurf o per prendere il sole in spiaggia. Il vicinato è amichevole, tranquillo e rispettoso della vostra privacy.\n\nPag offre la combinazione perfetta di paesaggi paradisiaci, mare cristallino e divertimento (Zrće e Šimuni). L’isola è famosa anche per il suo merletto e per il formaggio locale di latte di pecora, il paški sir.\n\nGodetevi il nuoto, il windsurf, le passeggiate e la pesca. Visitate la bellissima isola di Pag, la città di Zara con il famoso Organo Marino e i parchi nazionali di Krka, Kornati e Paklenica. Provate il buonissimo cibo locale: il formaggio, l’agnello, il pesce e l’olio d’oliva.",
+  "nearby": [
+    {
+      "place": "Il mare",
+      "distance": "30 m"
+    },
+    {
+      "place": "Negozio di alimentari",
+      "distance": "200 m"
+    },
+    {
+      "place": "Città di Pag (7 km in bici sulla vecchia strada sterrata)",
+      "distance": "9 km"
+    },
+    {
+      "place": "Novalja",
+      "distance": "25 km"
+    },
+    {
+      "place": "Zara",
+      "distance": "60 km"
+    }
+  ],
+  "directionsIntro": "L’isola di Pag è molto facile da raggiungere dalla terraferma, forse la più facile tra tutte le isole croate: è collegata da un ponte all’estremità meridionale e dal traghetto Prizna – Žigljen.",
+  "directions": [
+    {
+      "from": "Da Fiume (152 km)",
+      "text": "Guidate verso Novi Vinodolski e Senj, poi proseguite fino a Prizna (50 km dopo Senj), dove un cartello sulla destra indica il traghetto Prizna – Žigljen. Da Žigljen, Košljun dista circa 25 km: alla rotonda girate a sinistra verso la città di Pag, poi seguite Kolan e Šimuni. Dopo Šimuni, il cartello per Košljun è sulla destra; proseguite dritto per circa 5 km fino al mare."
+    },
+    {
+      "from": "Da Zara (60 km)",
+      "text": "Guidate verso Ražanac e Rtina, attraversate il ponte di Pag e proseguite per Miškovići e Dinjiška fino alla città di Pag. Dopo Pag prendete l’uscita per Novalja; dopo pochi chilometri il cartello per Košljun è sulla sinistra. Proseguite dritto per circa 5 km fino al mare."
+    },
+    {
+      "from": "A Košljun",
+      "text": "Arrivati in riva al mare, con il molo di fronte, girate a sinistra e dopo circa 100 m di nuovo a sinistra nella prima stradina in salita. Lì si trova l’appartamento Rino. Benvenuti!"
+    }
+  ]
+}

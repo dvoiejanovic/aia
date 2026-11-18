@@ -1,0 +1,16 @@
+---
+import type { Apartment } from '~/data/apartments';
+import type { Dict } from '~/i18n';
+interface Props { apartment: Apartment; t: Dict; short?: boolean }
+const { apartment: a, t, short = false } = Astro.props;
+const u = t.ui;
+const facts = [
+  `${a.seaMeters} ${u.fromSea}`,
+  `${u.sleeps}: ${a.sleeps}`,
+  a.beds === 'twin' ? u.twinBeds : u.doubleBed,
+  ...(short ? [] : [a.sofaBed ? u.sofaBed : '', a.floor === 0 ? u.groundFloor : u.firstFloor, u.category]),
+].filter(Boolean);
+---
+<ul class="facts">
+  {facts.map((f) => <li>{f}</li>)}
+</ul>

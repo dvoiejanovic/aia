@@ -1,0 +1,14 @@
+---
+import Photo from '~/components/Photo.astro';
+interface Props { dir: string; name: string; alt: string; kicker?: string; title: string; sub?: string; size?: 'full' | 'tall' | 'short' }
+const { dir, name, alt, kicker, title, sub, size = 'tall' } = Astro.props;
+---
+<section class:list={['hero', `hero--${size}`]}>
+  <Photo {dir} {name} {alt} eager />
+  <div class="hero__text wrap">
+    {kicker && <p class="kicker">{kicker}</p>}
+    <h1>{title}</h1>
+    {sub && <p class="hero__sub">{sub}</p>}
+    <slot />
+  </div>
+</section>

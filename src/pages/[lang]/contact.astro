@@ -1,0 +1,25 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Hero from '~/layouts/Hero.astro';
+import InquiryForm from '~/components/InquiryForm.astro';
+import { dict, langPaths } from '~/i18n';
+import { HOST_NAME } from '~/data/apartments';
+import { photo, altFor } from '~/lib/photos';
+
+export const getStaticPaths = langPaths;
+const { lang } = Astro.params;
+const t = dict(lang);
+---
+<Layout {lang} path="contact/" title={t.form.title} description={t.form.intro} image={photo('cres', '02-sunset')}>
+  <Hero dir="cres" name="02-sunset" alt={altFor(t, '02-sunset', 'Pogana, Cres')} kicker={t.ui.contact} title={t.form.title} sub={t.form.intro} size="short" />
+  <section class="wrap cols">
+    <InquiryForm {t} heading={false} />
+    <aside class="note">
+      <p class="kicker">{t.ui.yourHost}</p>
+      <h2>{t.home.hostTitle}</h2>
+      {t.home.host.map((p) => <p>{p}</p>)}
+      <p><strong>{HOST_NAME}</strong></p>
+      <p><em>[{t.ui.placeholderPhone}]</em></p>
+    </aside>
+  </section>
+</Layout>

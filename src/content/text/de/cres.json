@@ -1,0 +1,47 @@
+{
+  "title": "Pogana-Bucht, Insel Cres",
+  "tagline": "Eine Landschaft der Perfektion und Ruhe in Punta Križa",
+  "metaDesc": "Pogana-Bucht in Punta Križa auf der Insel Cres: üppige Wälder, eine ruhige Bucht, Kies- und Sandstrände in 200 m Entfernung, 15 km von Osor und 39 km von Mali Lošinj.",
+  "body": "Punta Križa und Pogana sind ohne Zweifel ein echter Naturpark mit reicher Flora und Fauna – eine Landschaft der Perfektion und Ruhe für Naturliebhaber und Abenteurer.\n\nÜppige Wälder, die sich mancherorts zu echten kleinen „mediterranen Urwäldern“ entwickeln, dienen als ideale Zuflucht für die zahlreichen Wildtiere der Umgebung: Damhirsche, Fasane, Hasen, Baummarder, Waldschnepfen, Wildenten und viele andere Arten.\n\nGleich nebenan liegt das bekannte Restaurant Pogana, berühmt für seine mediterrane Küche. Nur 200 m entfernt befinden sich Kies- und Sandstrände sowie das Camp Baldarin mit Lebensmittelgeschäft, Restaurants, Tennisplätzen, Beachvolleyball, Minigolf und Boots-, Fahrrad- und Kajakverleih.\n\nDie Strände im südlichen Teil von Cres werden Ihnen einfach den Atem rauben. Kiesig, sandig, steinig – Sie haben die Wahl! Wir empfehlen Ausflüge zu den Inseln Lošinj und Susak oder einen Besuch der historischen Städte Osor und Cres. Über 220 km Wanderwege durchziehen den Archipel; einer der schönsten führt von Osor auf die Osoršćica, mit einem einzigartigen Blick über den gesamten Archipel von Cres und Lošinj.",
+  "nearby": [
+    {
+      "place": "Das Meer",
+      "distance": "5 m"
+    },
+    {
+      "place": "Restaurant Pogana",
+      "distance": "wenige Schritte"
+    },
+    {
+      "place": "Kostenloser öffentlicher Parkplatz",
+      "distance": "90 m"
+    },
+    {
+      "place": "Strände und Camp Baldarin",
+      "distance": "200 m"
+    },
+    {
+      "place": "Osor",
+      "distance": "15 km"
+    },
+    {
+      "place": "Mali Lošinj",
+      "distance": "39 km"
+    }
+  ],
+  "directionsIntro": "Es gibt zwei Möglichkeiten, auf die Insel Cres zu kommen, beide mit der Fähre.",
+  "directions": [
+    {
+      "from": "Von Istrien",
+      "text": "Nehmen Sie die Fähre von Brestova (Istrien) nach Porozina (Cres)."
+    },
+    {
+      "from": "Über die Insel Krk",
+      "text": "Fahren Sie über die Insel Krk und nehmen Sie die Fähre von Valbiska (Krk) nach Merag (Cres)."
+    },
+    {
+      "from": "Auf Cres",
+      "text": "Fahren Sie in Richtung der Stadt Cres und weiter nach Osor, wo eine Brücke die Inseln Cres und Lošinj verbindet. Nehmen Sie am Kreisverkehr in Osor die Ausfahrt nach Punta Križa und fahren Sie ca. 20 Minuten durch unberührtes Waldgebiet nach Pogana. In Google Maps geben Sie „Pogana, Punta Križa“ ein."
+    }
+  ]
+}

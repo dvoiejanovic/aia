@@ -1,0 +1,24 @@
+---
+// The site root sends visitors to their browser language, or to English.
+import { languages } from '~/i18n';
+import { SITE_NAME } from '~/data/apartments';
+import { url } from '~/lib/paths';
+const fallback = url('en');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{SITE_NAME}</title>
+    <link rel="canonical" href={new URL(fallback, Astro.site).href} />
+    <script is:inline define:vars={{ languages, fallback }}>
+      const want = (navigator.languages || [navigator.language]).map((l) => l.slice(0, 2));
+      const lang = want.find((l) => languages.includes(l));
+      location.replace(lang ? fallback.replace(/en\/$/, lang + '/') : fallback);
+    </script>
+    <meta http-equiv="refresh" content={`1;url=${fallback}`} />
+  </head>
+  <body>
+    <p><a href={fallback}>{SITE_NAME}</a></p>
+  </body>
+</html>

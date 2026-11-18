@@ -1,0 +1,11 @@
+---
+import { languages, dict } from '~/i18n';
+import { url } from '~/lib/paths';
+interface Props { lang: string; path?: string; label: string }
+const { lang, path = '', label } = Astro.props;
+---
+<nav class="langs" aria-label={label}>
+  {languages.map((l) => (
+    <a href={url(l, path)} hreflang={l} lang={l} aria-current={l === lang ? 'true' : undefined} title={dict(l).langName}>{l.toUpperCase()}</a>
+  ))}
+</nav>

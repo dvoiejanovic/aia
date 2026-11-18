@@ -1,0 +1,9 @@
+---
+import type { Apartment } from '~/data/apartments';
+import type { Dict } from '~/i18n';
+interface Props { apartment: Apartment; t: Dict }
+const { apartment: a, t } = Astro.props;
+---
+<ul class="amen">
+  {a.amenities.map((k) => <li>{t.amenities[k]}</li>)}
+</ul>

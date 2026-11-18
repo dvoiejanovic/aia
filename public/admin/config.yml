@@ -1,0 +1,338 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+# Admin page settings (Sveltia CMS). Each entry below is a form that edits one file in src/content/.
+
+backend:
+  name: github
+  repo: dvoiejanovic/aia
+  branch: main
+
+# Not used yet: where the admin would store uploaded files.
+media_folder: /public/uploads
+public_folder: /uploads
+
+i18n:
+  locales: [en, hr, de, it]
+  default_locale: en
+
+collections:
+  - name: prices
+    label: Prices
+    icon: euro
+    files:
+      - name: prices
+        label: Prices and fees
+        file: src/content/prices.json
+        fields:
+          - { name: year, label: "Price list year", widget: number, value_type: int, min: 2025 }
+          - name: fees
+            label: Fees
+            widget: object
+            fields:
+              - { name: cleaning, label: "Cleaning fee (€)", widget: number, value_type: int, min: 0 }
+              - { name: petPerNight, label: "Small pet, per night (€)", widget: number, value_type: int, min: 0 }
+              - { name: shortStayPercent, label: "Extra charge for stays of 2 or 3 nights (%)", widget: number, value_type: int, min: 0 }
+          - name: apartments
+            label: Apartments
+            widget: object
+            fields:
+              - name: "rino"
+                label: "Apartment Rino"
+                widget: object
+                fields:
+                  - name: seasons
+                    label: Seasons
+                    widget: list
+                    summary: "€{{price}} per night"
+                    fields:
+                      - { name: price, label: "Price per night (€)", widget: number, value_type: int, min: 0 }
+                      - name: periods
+                        label: Periods
+                        widget: list
+                        summary: "{{from}} – {{to}}"
+                        fields:
+                          - { name: from, label: "From (DD.MM.)", widget: string, pattern: ['^\d{2}\.\d{2}\.$', 'Write the date as DD.MM. for example 05.06.'] }
+                          - { name: to, label: "To (DD.MM.)", widget: string, pattern: ['^\d{2}\.\d{2}\.$', 'Write the date as DD.MM. for example 26.06.'] }
+              - name: "punta-blue"
+                label: "Apartment Punta Blue"
+                widget: object
+                fields:
+                  - name: seasons
+                    label: Seasons
+                    widget: list
+                    summary: "€{{price}} per night"
+                    fields:
+                      - { name: price, label: "Price per night (€)", widget: number, value_type: int, min: 0 }
+                      - name: periods
+                        label: Periods
+                        widget: list
+                        summary: "{{from}} – {{to}}"
+                        fields:
+                          - { name: from, label: "From (DD.MM.)", widget: string, pattern: ['^\d{2}\.\d{2}\.$', 'Write the date as DD.MM. for example 05.06.'] }
+                          - { name: to, label: "To (DD.MM.)", widget: string, pattern: ['^\d{2}\.\d{2}\.$', 'Write the date as DD.MM. for example 26.06.'] }
+              - name: "punta-orange"
+                label: "Apartment Punta Orange"
+                widget: object
+                fields:
+                  - name: seasons
+                    label: Seasons
+                    widget: list
+                    summary: "€{{price}} per night"
+                    fields:
+                      - { name: price, label: "Price per night (€)", widget: number, value_type: int, min: 0 }
+                      - name: periods
+                        label: Periods
+                        widget: list
+                        summary: "{{from}} – {{to}}"
+                        fields:
+                          - { name: from, label: "From (DD.MM.)", widget: string, pattern: ['^\d{2}\.\d{2}\.$', 'Write the date as DD.MM. for example 05.06.'] }
+                          - { name: to, label: "To (DD.MM.)", widget: string, pattern: ['^\d{2}\.\d{2}\.$', 'Write the date as DD.MM. for example 26.06.'] }
+
+  - name: text
+    label: Texts
+    icon: translate
+    i18n: true
+    files:
+      - name: "home"
+        label: "Home page"
+        file: src/content/text/{{locale}}/home.json
+        i18n: true
+        fields:
+          - { name: "kicker", label: "Small line above the headline", widget: string, i18n: true }
+          - { name: "heroTitle", label: "Headline", widget: string, i18n: true }
+          - { name: "heroSub", label: "Line under the headline", widget: text, i18n: true }
+          - { name: "introTitle", label: "Introduction: title", widget: string, i18n: true }
+          - { name: "intro", label: "Introduction: text", widget: text, i18n: true, hint: "Leave an empty line between paragraphs." }
+          - { name: "hostTitle", label: "Host: title", widget: string, i18n: true }
+          - { name: "host", label: "Host: text", widget: text, i18n: true, hint: "Leave an empty line between paragraphs." }
+          - { name: "title", label: "Page title for Google", widget: string, i18n: true }
+          - { name: "metaDesc", label: "Description for Google", widget: text, i18n: true, hint: "Shown in search results. About 150 characters." }
+      - name: "rino"
+        label: "Apartment Rino"
+        file: src/content/text/{{locale}}/rino.json
+        i18n: true
+        fields:
+          - { name: "tagline", label: "Tagline (under the name)", widget: string, i18n: true }
+          - { name: "summary", label: "Short summary", widget: text, i18n: true }
+          - { name: "body", label: "Description", widget: text, i18n: true, hint: "Leave an empty line between paragraphs." }
+          - { name: "goodToKnow", label: "Good to know", widget: text, i18n: true, hint: "One item per line." }
+          - { name: "metaDesc", label: "Description for Google", widget: text, i18n: true, hint: "Shown in search results. About 150 characters." }
+      - name: "punta-blue"
+        label: "Apartment Punta Blue"
+        file: src/content/text/{{locale}}/punta-blue.json
+        i18n: true
+        fields:
+          - { name: "tagline", label: "Tagline (under the name)", widget: string, i18n: true }
+          - { name: "summary", label: "Short summary", widget: text, i18n: true }
+          - { name: "body", label: "Description", widget: text, i18n: true, hint: "Leave an empty line between paragraphs." }
+          - { name: "goodToKnow", label: "Good to know", widget: text, i18n: true, hint: "One item per line." }
+          - { name: "metaDesc", label: "Description for Google", widget: text, i18n: true, hint: "Shown in search results. About 150 characters." }
+      - name: "punta-orange"
+        label: "Apartment Punta Orange"
+        file: src/content/text/{{locale}}/punta-orange.json
+        i18n: true
+        fields:
+          - { name: "tagline", label: "Tagline (under the name)", widget: string, i18n: true }
+          - { name: "summary", label: "Short summary", widget: text, i18n: true }
+          - { name: "body", label: "Description", widget: text, i18n: true, hint: "Leave an empty line between paragraphs." }
+          - { name: "goodToKnow", label: "Good to know", widget: text, i18n: true, hint: "One item per line." }
+          - { name: "metaDesc", label: "Description for Google", widget: text, i18n: true, hint: "Shown in search results. About 150 characters." }
+      - name: "pag"
+        label: "Island Pag"
+        file: src/content/text/{{locale}}/pag.json
+        i18n: true
+        fields:
+          - { name: "title", label: "Title", widget: string, i18n: true }
+          - { name: "tagline", label: "Tagline", widget: string, i18n: true }
+          - { name: "body", label: "About the island", widget: text, i18n: true, hint: "Leave an empty line between paragraphs." }
+          - name: "nearby"
+            label: "Nearby"
+            widget: list
+            i18n: true
+            summary: "{{place}}"
+            fields:
+              - { name: "place", label: "Place", widget: string, i18n: true }
+              - { name: "distance", label: "Distance", widget: string, i18n: true }
+          - { name: "directionsIntro", label: "Getting there: introduction", widget: text, i18n: true }
+          - name: "directions"
+            label: "Getting there: routes"
+            widget: list
+            i18n: true
+            summary: "{{from}}"
+            fields:
+              - { name: "from", label: "From", widget: string, i18n: true }
+              - { name: "text", label: "Directions", widget: text, i18n: true }
+          - { name: "metaDesc", label: "Description for Google", widget: text, i18n: true, hint: "Shown in search results. About 150 characters." }
+      - name: "cres"
+        label: "Island Cres"
+        file: src/content/text/{{locale}}/cres.json
+        i18n: true
+        fields:
+          - { name: "title", label: "Title", widget: string, i18n: true }
+          - { name: "tagline", label: "Tagline", widget: string, i18n: true }
+          - { name: "body", label: "About the island", widget: text, i18n: true, hint: "Leave an empty line between paragraphs." }
+          - name: "nearby"
+            label: "Nearby"
+            widget: list
+            i18n: true
+            summary: "{{place}}"
+            fields:
+              - { name: "place", label: "Place", widget: string, i18n: true }
+              - { name: "distance", label: "Distance", widget: string, i18n: true }
+          - { name: "directionsIntro", label: "Getting there: introduction", widget: text, i18n: true }
+          - name: "directions"
+            label: "Getting there: routes"
+            widget: list
+            i18n: true
+            summary: "{{from}}"
+            fields:
+              - { name: "from", label: "From", widget: string, i18n: true }
+              - { name: "text", label: "Directions", widget: text, i18n: true }
+          - { name: "metaDesc", label: "Description for Google", widget: text, i18n: true, hint: "Shown in search results. About 150 characters." }
+      - name: "form"
+        label: "Inquiry form"
+        file: src/content/text/{{locale}}/form.json
+        i18n: true
+        fields:
+          - { name: "title", label: "Send an inquiry", widget: string, i18n: true }
+          - { name: "intro", label: "Tell us your dates and we will reply with availability an…", widget: text, i18n: true }
+          - { name: "name", label: "Your name", widget: string, i18n: true }
+          - { name: "email", label: "Email", widget: string, i18n: true }
+          - { name: "phone", label: "Phone / WhatsApp", widget: string, i18n: true }
+          - { name: "optional", label: "optional", widget: string, i18n: true }
+          - { name: "apartment", label: "Apartment", widget: string, i18n: true }
+          - { name: "choose", label: "Please choose", widget: string, i18n: true }
+          - { name: "anyApartment", label: "Any of them – please advise", widget: string, i18n: true }
+          - { name: "arrival", label: "Arrival", widget: string, i18n: true }
+          - { name: "departure", label: "Departure", widget: string, i18n: true }
+          - { name: "guests", label: "Guests", widget: string, i18n: true }
+          - { name: "pet", label: "We are travelling with a small pet", widget: string, i18n: true }
+          - { name: "message", label: "Message", widget: string, i18n: true }
+          - { name: "messagePlaceholder", label: "Anything else we should know?", widget: string, i18n: true }
+          - { name: "send", label: "Send inquiry", widget: string, i18n: true }
+          - { name: "sending", label: "Sending…", widget: string, i18n: true }
+          - { name: "success", label: "Thank you! Your inquiry has been sent. Sanja will reply b…", widget: string, i18n: true }
+          - { name: "mailto", label: "Your email app has been opened with the inquiry ready to …", widget: text, i18n: true }
+          - { name: "error", label: "Something went wrong. Please try again in a moment.", widget: string, i18n: true }
+          - { name: "errRequired", label: "Please fill in this field.", widget: string, i18n: true }
+          - { name: "errEmail", label: "Please enter a valid email address.", widget: string, i18n: true }
+          - { name: "errDates", label: "Departure must be after arrival.", widget: string, i18n: true }
+          - { name: "privacy", label: "Your details are used only to answer this inquiry.", widget: string, i18n: true }
+          - { name: "subject", label: "Apartment inquiry", widget: string, i18n: true }
+          - { name: "yes", label: "Yes", widget: string, i18n: true }
+          - { name: "no", label: "No", widget: string, i18n: true }
+      - name: "general"
+        label: "Menus, labels and amenities"
+        file: src/content/text/{{locale}}/general.json
+        i18n: true
+        fields:
+          - name: "ui"
+            label: "Menus, buttons and labels"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "home", label: "Home", widget: string, i18n: true }
+              - { name: "apartments", label: "Apartments", widget: string, i18n: true }
+              - { name: "islands", label: "Islands", widget: string, i18n: true }
+              - { name: "contact", label: "Contact", widget: string, i18n: true }
+              - { name: "inquiry", label: "Inquiry", widget: string, i18n: true }
+              - { name: "cta", label: "Check availability", widget: string, i18n: true }
+              - { name: "from", label: "from", widget: string, i18n: true }
+              - { name: "perNight", label: "per night", widget: string, i18n: true }
+              - { name: "night", label: "night", widget: string, i18n: true }
+              - { name: "sleeps", label: "Sleeps", widget: string, i18n: true }
+              - { name: "guests", label: "guests", widget: string, i18n: true }
+              - { name: "fromSea", label: "m from the sea", widget: string, i18n: true }
+              - { name: "groundFloor", label: "Ground floor", widget: string, i18n: true }
+              - { name: "firstFloor", label: "First floor", widget: string, i18n: true }
+              - { name: "twinBeds", label: "Twin beds", widget: string, i18n: true }
+              - { name: "doubleBed", label: "Double bed", widget: string, i18n: true }
+              - { name: "sofaBed", label: "Sofa bed", widget: string, i18n: true }
+              - { name: "category", label: "Studio apartment ★★★", widget: string, i18n: true }
+              - { name: "amenities", label: "Amenities", widget: string, i18n: true }
+              - { name: "prices", label: "Prices", widget: string, i18n: true }
+              - { name: "period", label: "Period", widget: string, i18n: true }
+              - { name: "pricePerNight", label: "Price per night", widget: string, i18n: true }
+              - { name: "taxIncluded", label: "Visitor’s tax is included in the price.", widget: string, i18n: true }
+              - { name: "cleaning", label: "Cleaning fee", widget: string, i18n: true }
+              - { name: "pet", label: "Small pet", widget: string, i18n: true }
+              - { name: "shortStay", label: "Additional charge for stays of 2 or 3 nights", widget: string, i18n: true }
+              - { name: "damages", label: "All damages caused in the apartment must be paid to the h…", widget: text, i18n: true }
+              - { name: "viewApartment", label: "View apartment", widget: string, i18n: true }
+              - { name: "photos", label: "Photos", widget: string, i18n: true }
+              - { name: "location", label: "Location", widget: string, i18n: true }
+              - { name: "openMap", label: "Open in Google Maps", widget: string, i18n: true }
+              - { name: "gettingThere", label: "Getting there", widget: string, i18n: true }
+              - { name: "goodToKnow", label: "Good to know", widget: string, i18n: true }
+              - { name: "nearby", label: "Nearby", widget: string, i18n: true }
+              - { name: "aboutIsland", label: "About the island", widget: string, i18n: true }
+              - { name: "island", label: "Island", widget: string, i18n: true }
+              - { name: "onIsland", label: "Island of", widget: string, i18n: true }
+              - { name: "explore", label: "Explore", widget: string, i18n: true }
+              - { name: "ourApartments", label: "Our apartments", widget: string, i18n: true }
+              - { name: "yourHost", label: "Your host", widget: string, i18n: true }
+              - { name: "registration", label: "Registration", widget: string, i18n: true }
+              - { name: "allRights", label: "All rights reserved.", widget: string, i18n: true }
+              - { name: "close", label: "Close", widget: string, i18n: true }
+              - { name: "previous", label: "Previous", widget: string, i18n: true }
+              - { name: "next", label: "Next", widget: string, i18n: true }
+              - { name: "menu", label: "Menu", widget: string, i18n: true }
+              - { name: "language", label: "Language", widget: string, i18n: true }
+              - { name: "skip", label: "Skip to content", widget: string, i18n: true }
+              - { name: "placeholderPhone", label: "Phone and WhatsApp number will be added here.", widget: string, i18n: true }
+              - { name: "prototype", label: "Design prototype", widget: string, i18n: true }
+          - name: "amenities"
+            label: "Amenity names"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "ac", label: "Air conditioning", widget: string, i18n: true }
+              - { name: "wifi", label: "Free Wi-Fi", widget: string, i18n: true }
+              - { name: "kitchen", label: "Fully equipped kitchen", widget: string, i18n: true }
+              - { name: "oven", label: "Oven and electric stove", widget: string, i18n: true }
+              - { name: "fridge", label: "Refrigerator", widget: string, i18n: true }
+              - { name: "coffee", label: "Filter coffee maker", widget: string, i18n: true }
+              - { name: "kettle", label: "Kettle", widget: string, i18n: true }
+              - { name: "tv", label: "Flat-screen TV", widget: string, i18n: true }
+              - { name: "washer", label: "Washing machine", widget: string, i18n: true }
+              - { name: "linens", label: "Bed linen and towels", widget: string, i18n: true }
+              - { name: "hairdryer", label: "Hairdryer", widget: string, i18n: true }
+              - { name: "terrace", label: "Terrace with outdoor furniture", widget: string, i18n: true }
+              - { name: "garden", label: "Fenced garden", widget: string, i18n: true }
+              - { name: "parking", label: "Free parking nearby", widget: string, i18n: true }
+              - { name: "entrance", label: "Private entrance", widget: string, i18n: true }
+              - { name: "shades", label: "Room-darkening shades", widget: string, i18n: true }
+              - { name: "seaview", label: "Sea view", widget: string, i18n: true }
+              - { name: "fireplace", label: "Rustic fireplace", widget: string, i18n: true }
+              - { name: "fans", label: "Portable fans", widget: string, i18n: true }
+              - { name: "highchair", label: "High chair", widget: string, i18n: true }
+              - { name: "crib", label: "Travel crib", widget: string, i18n: true }
+              - { name: "pets", label: "Small pets welcome", widget: string, i18n: true }
+              - { name: "waterfront", label: "Waterfront", widget: string, i18n: true }
+              - { name: "longstay", label: "Long-term stays allowed", widget: string, i18n: true }
+          - name: "photoKinds"
+            label: "Photo descriptions"
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: "kitchen", label: "Kitchen", widget: string, i18n: true }
+              - { name: "living", label: "Living room", widget: string, i18n: true }
+              - { name: "bedroom", label: "Bedroom", widget: string, i18n: true }
+              - { name: "bathroom", label: "Bathroom", widget: string, i18n: true }
+              - { name: "terrace", label: "Terrace", widget: string, i18n: true }
+              - { name: "exterior", label: "The house", widget: string, i18n: true }
+              - { name: "garden", label: "Garden", widget: string, i18n: true }
+              - { name: "view", label: "Sea view", widget: string, i18n: true }
+              - { name: "aerial", label: "Aerial view", widget: string, i18n: true }
+              - { name: "coast", label: "Coast", widget: string, i18n: true }
+              - { name: "sunset", label: "Sunset", widget: string, i18n: true }
+              - { name: "sea", label: "The sea", widget: string, i18n: true }
+              - { name: "beach", label: "Beach", widget: string, i18n: true }
+              - { name: "swim", label: "Swimming", widget: string, i18n: true }
+              - { name: "relax", label: "Relaxing by the sea", widget: string, i18n: true }
+              - { name: "cheese", label: "Pag cheese", widget: string, i18n: true }
+              - { name: "lace", label: "Pag lace", widget: string, i18n: true }
+              - { name: "harbour", label: "Harbour", widget: string, i18n: true }
+              - { name: "village", label: "The village", widget: string, i18n: true }

@@ -1,0 +1,43 @@
+{
+  "title": "Košljun, island of Pag",
+  "tagline": "Untouched nature, ancient pine forests and a crystal-clear sea",
+  "metaDesc": "Košljun on the island of Pag: a quiet seaside village surrounded by pine forests, 9 km from the town of Pag and 60 km from Zadar. Beaches, windsurfing, Pag cheese and lace.",
+  "body": "Košljun on the island of Pag is a great destination for those who want to relax and enjoy untouched nature. It is surrounded by ancient pine forests, and from Košljun you can enjoy a beautiful panoramic view of the islands of Vir, Silba and Olib.\n\nIt is a quiet and relaxing place to spend your holidays. Košljun has a lot of sunny days, and the weather is nice with a modest wind during the day, which is ideal for windsurfing or lying on the beach. The neighbourhood is peaceful and polite and respects your privacy.\n\nPag has the perfect combination of paradise surroundings, crystal-clear sea and fabulous parties (Zrće and Šimuni). The island is also very famous for its lace-making and the local cheese – paški sir – made from sheep’s milk.\n\nEnjoy swimming, windsurfing, walking and fishing. Visit the beautiful island of Pag, the town of Zadar with its world-famous Sea Organ, and the national parks. Taste the fantastic local food: cheese, lamb, fish and olive oil.",
+  "nearby": [
+    {
+      "place": "The sea",
+      "distance": "30 m"
+    },
+    {
+      "place": "Grocery shop",
+      "distance": "200 m"
+    },
+    {
+      "place": "Town of Pag (7 km by bike on the old macadam road)",
+      "distance": "9 km"
+    },
+    {
+      "place": "Novalja",
+      "distance": "25 km"
+    },
+    {
+      "place": "Zadar",
+      "distance": "60 km"
+    }
+  ],
+  "directionsIntro": "The island of Pag is very easy to reach from the mainland, possibly the easiest of all the Croatian islands: it is connected by a bridge at its southern tip and by the ferry Prizna – Žigljen.",
+  "directions": [
+    {
+      "from": "From Rijeka (152 km)",
+      "text": "Drive towards Novi Vinodolski and Senj, then on to Prizna (50 km after Senj), where a sign on the right marks the ferry Prizna – Žigljen. From Žigljen, Košljun is approx. 25 km: at the roundabout turn left towards the town of Pag, then follow Kolan and Šimuni. After Šimuni, the sign for Košljun is on the right; drive about 5 km straight down to the seashore."
+    },
+    {
+      "from": "From Zadar (60 km)",
+      "text": "Drive towards Ražanac and Rtina, cross the Pag Bridge and continue via Miškovići and Dinjiška to the town of Pag. After Pag, take the exit for Novalja; a few kilometres on, the sign for Košljun is on the left. Drive about 5 km straight down to the seashore."
+    },
+    {
+      "from": "In Košljun",
+      "text": "When you reach the seashore, with the pier in front of you, turn left and after about 100 m turn left again into the first little road up. There is Apartment Rino. You are welcome!"
+    }
+  ]
+}

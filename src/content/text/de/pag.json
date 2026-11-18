@@ -1,0 +1,43 @@
+{
+  "title": "Košljun, Insel Pag",
+  "tagline": "Unberührte Natur, alte Pinienwälder und kristallklares Meer",
+  "metaDesc": "Košljun auf der Insel Pag: ruhiger Küstenort umgeben von Pinienwald, 9 km von der Stadt Pag und 60 km von Zadar entfernt. Strände, Windsurfen, Pager Käse und Spitze.",
+  "body": "Košljun auf der Insel Pag ist ein wunderschönes Reiseziel für alle, die unberührte Natur genießen und sich entspannen wollen. Der Ort ist von altem Pinienwald umgeben und bietet einen wunderschönen Ausblick auf die Inseln Vir, Silba und Olib.\n\nEin ruhiges und entspanntes Reiseziel für Ihren Urlaub. Košljun hat viele sonnige Tage, das Wetter ist sehr angenehm, mit leichtem Wind tagsüber – ideal zum Windsurfen oder zum Liegen am Strand. Die Nachbarschaft ist friedlich und höflich und respektiert Ihre Privatsphäre.\n\nPag bietet die perfekte Kombination aus paradiesischer Umgebung, kristallklarem Meer und fabelhaften Partys (Zrće und Šimuni). Die Insel ist außerdem berühmt für ihre Spitze und den einheimischen Schafskäse – paški sir.\n\nGenießen Sie Schwimmen, Windsurfen, Wandern und Angeln. Besuchen Sie die schöne Insel Pag, die Stadt Zadar mit der weltberühmten Meeresorgel und die Nationalparks. Lassen Sie sich das einheimische Essen schmecken: Käse, Lamm, Fisch und Olivenöl.",
+  "nearby": [
+    {
+      "place": "Das Meer",
+      "distance": "30 m"
+    },
+    {
+      "place": "Lebensmittelgeschäft",
+      "distance": "200 m"
+    },
+    {
+      "place": "Stadt Pag (7 km mit dem Fahrrad über die alte Schotterstraße)",
+      "distance": "9 km"
+    },
+    {
+      "place": "Novalja",
+      "distance": "25 km"
+    },
+    {
+      "place": "Zadar",
+      "distance": "60 km"
+    }
+  ],
+  "directionsIntro": "Die Insel Pag ist vom Festland sehr leicht zu erreichen, vielleicht am leichtesten von allen kroatischen Inseln: An der Südspitze ist sie durch eine Brücke verbunden, außerdem gibt es die Fähre Prizna – Žigljen.",
+  "directions": [
+    {
+      "from": "Von Rijeka (152 km)",
+      "text": "Fahren Sie in Richtung Novi Vinodolski und Senj, dann weiter nach Prizna (50 km nach Senj), wo rechts ein Schild zur Fähre Prizna – Žigljen weist. Von Žigljen sind es ca. 25 km nach Košljun: am Kreisverkehr links in Richtung Stadt Pag, dann Richtung Kolan und Šimuni. Nach Šimuni steht rechts das Schild Košljun; fahren Sie etwa 5 km geradeaus bis zum Meer."
+    },
+    {
+      "from": "Von Zadar (60 km)",
+      "text": "Fahren Sie in Richtung Ražanac und Rtina, überqueren Sie die Pager Brücke und fahren Sie über Miškovići und Dinjiška zur Stadt Pag. Nach Pag nehmen Sie die Ausfahrt Richtung Novalja; nach einigen Kilometern steht links das Schild Košljun. Fahren Sie etwa 5 km geradeaus bis zum Meer."
+    },
+    {
+      "from": "In Košljun",
+      "text": "Wenn Sie am Ufer ankommen und die Mole vor sich sehen, biegen Sie links ab und nach etwa 100 m wieder links in die erste kleine Straße bergauf. Dort ist das Apartment Rino. Herzlich willkommen!"
+    }
+  ]
+}

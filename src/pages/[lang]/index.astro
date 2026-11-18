@@ -1,0 +1,85 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Hero from '~/layouts/Hero.astro';
+import Photo from '~/components/Photo.astro';
+import Facts from '~/components/Facts.astro';
+import { dict, langPaths } from '~/i18n';
+import { apartments, islands, fromPrice } from '~/data/apartments';
+import { photo, altFor } from '~/lib/photos';
+import { url } from '~/lib/paths';
+
+export const getStaticPaths = langPaths;
+const { lang } = Astro.params;
+const t = dict(lang);
+const to = (p = '') => url(lang, p);
+---
+<Layout {lang} title={t.home.title} description={t.home.metaDesc} image={photo('cres', '01-sunset')}>
+  <Hero dir="cres" name="01-sunset" alt={altFor(t, '01-sunset', 'Pogana, Cres')} kicker={t.home.kicker} title={t.home.heroTitle} sub={t.home.heroSub} size="full">
+    <div class="hero__actions">
+      <a class="btn btn--primary" href={to('contact/')}>{t.ui.cta}</a>
+      <a class="btn btn--ghost" href="#apartments">{t.ui.ourApartments}</a>
+    </div>
+  </Hero>
+
+  <section class="wrap intro">
+    <div>
+      <p class="kicker">{t.ui.ourApartments}</p>
+      <h2>{t.home.introTitle}</h2>
+    </div>
+    <div class="intro__body">
+      <p class="lead">{t.home.intro[0]}</p>
+      <p>{t.home.intro[1]}</p>
+    </div>
+  </section>
+
+  <section class="rows" id="apartments">
+    {apartments.map((a) => (
+      <article class="row">
+        <a class="row__img" href={to(`${a.slug}/`)} tabindex="-1" aria-hidden="true">
+          <Photo dir={a.slug} name={a.cover} alt={altFor(t, a.cover, a.name)} sizes="(min-width: 900px) 58vw, 100vw" />
+        </a>
+        <div class="row__text">
+          <p class="kicker">{a.place} · {t.ui.onIsland} {islands.find((i) => i.slug === a.island)!.name}</p>
+          <h2><a href={to(`${a.slug}/`)}>{a.name}</a></h2>
+          <p>{t.apartments[a.slug].summary}</p>
+          <Facts apartment={a} {t} short />
+          <p class="price"><small>{t.ui.from}</small> €{fromPrice(a)} <small>/ {t.ui.night}</small></p>
+          <a class="link" href={to(`${a.slug}/`)}>{t.ui.viewApartment}</a>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <p class="kicker">{t.ui.explore}</p>
+      <h2>{t.ui.islands}</h2>
+      <div class="tiles">
+        {islands.map((i) => (
+          <a class="tile" href={to(`island-${i.slug}/`)}>
+            <Photo dir={i.slug} name={i.slug === 'pag' ? '02-coast' : '03-harbour'} alt={t.islands[i.slug].title} sizes="(min-width: 800px) 50vw, 100vw" />
+            <div class="tile__text">
+              <p class="kicker">{t.ui.onIsland} {i.name}</p>
+              <h3>{t.islands[i.slug].title}</h3>
+              <p>{t.islands[i.slug].tagline}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap host">
+    <p class="kicker">{t.ui.yourHost}</p>
+    <h2>{t.home.hostTitle}</h2>
+    {t.home.host.map((p) => <p>{p}</p>)}
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2>{t.form.title}</h2>
+      <p>{t.form.intro}</p>
+      <a class="btn" href={to('contact/')}>{t.ui.cta}</a>
+    </div>
+  </section>
+</Layout>

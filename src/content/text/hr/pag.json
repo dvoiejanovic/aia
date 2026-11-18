@@ -1,0 +1,43 @@
+{
+  "title": "Košljun, otok Pag",
+  "tagline": "Netaknuta priroda, stoljetne borove šume i kristalno čisto more",
+  "metaDesc": "Košljun na otoku Pagu: mirno mjesto uz more okruženo borovom šumom, 9 km od grada Paga i 60 km od Zadra. Plaže, jedrenje na dasci, paški sir i čipka.",
+  "body": "Košljun na otoku Pagu odlično je odredište za sve koji se žele opustiti i uživati u netaknutoj prirodi. Okružen je stoljetnom borovom šumom, a iz Košljuna se pruža prekrasan panoramski pogled na otoke Vir, Silbu i Olib.\n\nMirno je i opuštajuće mjesto za odmor. Košljun ima mnogo sunčanih dana, a vrijeme je ugodno, s umjerenim vjetrom tijekom dana, što je idealno za jedrenje na dasci ili ležanje na plaži. Susjedstvo je mirno i ljubazno te poštuje vašu privatnost.\n\nPag je savršen spoj rajskog okruženja, kristalno čistog mora i sjajne zabave (Zrće i Šimuni). Otok je poznat i po čipkarstvu te domaćem paškom siru od ovčjeg mlijeka.\n\nUživajte u plivanju, jedrenju na dasci, šetnjama i ribolovu. Posjetite prekrasan otok Pag, grad Zadar sa svjetski poznatim Morskim orguljama i nacionalne parkove. Kušajte izvrsnu domaću hranu: sir, janjetinu, ribu i maslinovo ulje.",
+  "nearby": [
+    {
+      "place": "More",
+      "distance": "30 m"
+    },
+    {
+      "place": "Trgovina",
+      "distance": "200 m"
+    },
+    {
+      "place": "Grad Pag (7 km biciklom starom makadamskom cestom)",
+      "distance": "9 km"
+    },
+    {
+      "place": "Novalja",
+      "distance": "25 km"
+    },
+    {
+      "place": "Zadar",
+      "distance": "60 km"
+    }
+  ],
+  "directionsIntro": "Do otoka Paga vrlo je lako doći s kopna, možda najlakše od svih hrvatskih otoka: na južnom kraju povezan je mostom, a tu je i trajekt Prizna – Žigljen.",
+  "directions": [
+    {
+      "from": "Iz Rijeke (152 km)",
+      "text": "Vozite prema Novom Vinodolskom i Senju, zatim do Prizne (50 km nakon Senja), gdje je s desne strane znak za trajekt Prizna – Žigljen. Od Žigljena do Košljuna ima oko 25 km: na kružnom toku skrenite lijevo prema gradu Pagu, zatim pratite smjer Kolan i Šimuni. Nakon Šimuna znak za Košljun je s desne strane; vozite oko 5 km ravno do obale."
+    },
+    {
+      "from": "Iz Zadra (60 km)",
+      "text": "Vozite prema Ražancu i Rtini, prijeđite Paški most i nastavite preko Miškovića i Dinjiške do grada Paga. Nakon Paga pratite izlaz za Novalju; nekoliko kilometara dalje znak za Košljun je s lijeve strane. Vozite oko 5 km ravno do obale."
+    },
+    {
+      "from": "U Košljunu",
+      "text": "Kad stignete do obale, s molom ispred vas, skrenite lijevo i nakon oko 100 m ponovno lijevo u prvu malu ulicu uzbrdo. Tu je apartman Rino. Dobro došli!"
+    }
+  ]
+}

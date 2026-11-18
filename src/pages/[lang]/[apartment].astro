@@ -1,0 +1,85 @@
+---
+import { getImage } from 'astro:assets';
+import Layout from '~/layouts/Layout.astro';
+import Hero from '~/layouts/Hero.astro';
+import Facts from '~/components/Facts.astro';
+import Amenities from '~/components/Amenities.astro';
+import Gallery from '~/components/Gallery.astro';
+import PriceTable from '~/components/PriceTable.astro';
+import InquiryForm from '~/components/InquiryForm.astro';
+import { dict, languages } from '~/i18n';
+import { apartments, getApartment, getIsland, fromPrice } from '~/data/apartments';
+import { photo, altFor } from '~/lib/photos';
+import { apartmentSchema } from '~/lib/schema';
+import { url } from '~/lib/paths';
+
+export const getStaticPaths = () =>
+  languages.flatMap((lang) => apartments.map((a) => ({ params: { lang, apartment: a.slug } })));
+const { lang, apartment } = Astro.params;
+const t = dict(lang);
+const a = getApartment(apartment);
+const c = t.apartments[a.slug];
+const island = getIsland(a.island);
+const loc = t.islands[a.island];
+const to = (p = '') => url(lang, p);
+const path = `${a.slug}/`;
+const images = await Promise.all(a.photos.slice(0, 8).map(async (n) => new URL((await getImage({ src: photo(a.slug, n), width: 1600 })).src, Astro.site).href));
+const jsonLd = apartmentSchema(a, t, new URL(to(path), Astro.site).href, images);
+---
+<Layout {lang} {path} title={`${a.name} – ${c.tagline}`} description={c.metaDesc} image={photo(a.slug, a.cover)} {jsonLd}>
+  <Hero dir={a.slug} name={a.cover} alt={altFor(t, a.cover, a.name)} kicker={`${a.place} · ${t.ui.onIsland} ${island.name}`} title={a.name} sub={c.tagline} />
+
+  <div class="bar">
+    <div class="wrap bar__in">
+      <Facts apartment={a} {t} />
+      <div class="bar__cta">
+        <p class="price"><small>{t.ui.from}</small> €{fromPrice(a)} <small>/ {t.ui.night}</small></p>
+        <a class="btn btn--primary" href="#inquiry">{t.ui.cta}</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap cols">
+    <div>
+      <p class="lead">{c.body[0]}</p>
+      {c.body.slice(1).map((p) => <p>{p}</p>)}
+    </div>
+    <aside class="note">
+      <h2>{t.ui.goodToKnow}</h2>
+      <ul class="list">{c.goodToKnow.map((g) => <li>{g}</li>)}</ul>
+    </aside>
+  </section>
+
+  <section class="wrap gallery" aria-label={t.ui.photos}>
+    <Gallery dir={a.slug} names={a.photos} {t} where={a.name} show={5} class="gal--mosaic" sizes="(min-width: 700px) 50vw, 50vw" />
+  </section>
+
+  <section class="band">
+    <div class="wrap cols cols--even">
+      <div>
+        <h2>{t.ui.amenities}</h2>
+        <Amenities apartment={a} {t} />
+      </div>
+      <PriceTable apartment={a} {t} />
+    </div>
+  </section>
+
+  <section class="wrap cols cols--even">
+    <div>
+      <p class="kicker">{t.ui.location}</p>
+      <h2>{loc.title}</h2>
+      <p>{loc.body[0]}</p>
+      <p><a class="link" href={to(`island-${a.island}/`)}>{t.ui.aboutIsland}</a></p>
+    </div>
+    <div>
+      <ul class="nearby">{loc.nearby.map((n) => <li><span>{n.place}</span><span>{n.distance}</span></li>)}</ul>
+      <p style="margin-top:1.5rem"><a class="link" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.mapQuery)}`} target="_blank" rel="noopener">{t.ui.openMap}</a></p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap formwrap">
+      <InquiryForm {t} preselect={a.slug} />
+    </div>
+  </section>
+</Layout>
