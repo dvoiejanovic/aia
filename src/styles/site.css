@@ -47,6 +47,15 @@
   .a .hd__nav { gap: 1.2rem; }
   .a .hd__panel { gap: 1.1rem; }
 }
+/* Phones: keep the menu button fully on screen next to the logo. */
+@media (max-width: 520px) {
+  .a .hd { gap: 0.75rem; padding-inline: 1rem; }
+  .a .hd__logo { flex-shrink: 1; min-width: 0; gap: 0.55rem; font-size: 1.05rem; }
+  .a .hd__logo img { height: 2.1rem; }
+  .a .hd__name span { font-size: 0.5rem; letter-spacing: 0.32em; }
+  .a .hd__toggle { flex-shrink: 0; padding: 0.55em 0.75em; letter-spacing: 0.08em; }
+}
+@media (max-width: 350px) { .a .hd__name { display: none; } }
 @media (max-width: 1280px) {
   .a .hd__toggle { display: block; }
   .a .hd__panel { display: none; position: absolute; inset: 100% 0 auto; background: var(--bg); color: var(--ink); flex-direction: column; align-items: stretch; gap: 1.25rem; padding: 1.5rem clamp(1.25rem, 3vw, 2.5rem) 2rem; box-shadow: 0 12px 24px rgb(0 0 0 / 0.08); max-height: calc(100dvh - 4rem); overflow: auto; }
